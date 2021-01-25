@@ -1,25 +1,61 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import ProductCard from './ProductCard';
+import CssBaseline from '@material-ui/core/CssBaseline';
+import Container from '@material-ui/core/Container';
+import WheeAppBar from './WheeAppBar';
+import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
+import { CartProvider } from "react-hook-cart";
+
+const mockData = [
+  {
+    title: "Circle",
+    description: "Perfect choice when you don't need any corners.",
+    price: "999 €",
+    src: "./circle.svg",
+    id: "circle1"
+  },
+  {
+    title: "Rectangle",
+    description: "For once, It's a great idea to think inside the box.",
+    price: "899 €",
+    src: "./rectangle.svg",
+    id: "rectangle1"
+  },
+  {
+    title: "Triangle",
+    description: "A true classic with three elegant corners.",
+    price: "1009 €",
+    src: "./triangle.svg",
+    id: "triangle1"
+  }
+]
+
+const wheeTheme = createMuiTheme({
+  palette: {
+    background: {
+      default: '#ffffff'
+    }
+  },
+  typography: {
+    fontFamily: 'Playfair Display, Roboto, sans-serif, Helvetica',
+    h4: {
+      fontSize: '2.25rem',
+      lineHeight: '3.75rem'
+    }
+  }
+});
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <CartProvider>
+      <ThemeProvider theme={wheeTheme}>
+        <CssBaseline />
+        <WheeAppBar />
+        <Container>
+          {mockData.map((item: any) => <ProductCard id={item.id} src={item.src} title={item.title} description={item.description} price={item.price}/>)}
+        </Container>
+      </ThemeProvider>
+    </CartProvider>
   );
 }
 
