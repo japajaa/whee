@@ -7,7 +7,8 @@ import IconButton from '@material-ui/core/IconButton';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import { useCart } from "react-hook-cart";
 import CartDialog from './CartDialog';
-
+import useMediaQuery from '@material-ui/core/useMediaQuery';
+import { useTheme } from '@material-ui/core/styles';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -50,6 +51,8 @@ const useStyles = makeStyles((theme: Theme) =>
 const WheeAppBar = () => {
   const [open, setOpen] = React.useState(false);
   const classes = useStyles();
+  const theme = useTheme();
+  const hideDescription = useMediaQuery(theme.breakpoints.down('xs'));
   const { totalItems } = useCart();
 
   const handleClickOpen = () => {
@@ -68,9 +71,10 @@ const WheeAppBar = () => {
             <Typography variant="h6" className={classes.whee}>
               whee
             </Typography>
+            {!hideDescription ? 
             <Typography variant="h6" className={classes.inlineText}>
               The most definitive shape store in the world
-            </Typography>
+            </Typography> : null }
           </div>
           <Typography variant="body2" className={classes.inlineText}>
             {totalItems === 0 ? 'No items in cart' : `${totalItems} item(s) in cart`}

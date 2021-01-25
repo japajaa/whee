@@ -52,7 +52,7 @@ function App() {
         <CssBaseline />
         <WheeAppBar />
         <Container>
-          {mockData.map((item: any) => <ProductCard id={item.id} src={item.src} title={item.title} description={item.description} price={item.price}/>)}
+          {mockData.map((item: any) => <ProductCard key={item.id} id={item.id} src={item.src} title={item.title} description={item.description} price={item.price}/>)}
         </Container>
       </ThemeProvider>
     </CartProvider>

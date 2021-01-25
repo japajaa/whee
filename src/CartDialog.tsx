@@ -19,6 +19,7 @@ import ListItemAvatar from '@material-ui/core/ListItemAvatar';
 import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
 import ListItemText from '@material-ui/core/ListItemText';
 import Avatar from '@material-ui/core/Avatar';
+import Typography from '@material-ui/core/Typography';
 
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -44,7 +45,7 @@ const CartDialog = ({ onClose, open }: CartDialogProps) => {
   const theme = useTheme();
   const classes = useStyles();
   const fullScreen = useMediaQuery(theme.breakpoints.down('xs'));
-  const { totalItems, items, removeItem, updateItemQuantity } = useCart();
+  const { totalCost, items, removeItem, updateItemQuantity } = useCart();
 
   return (
       <Dialog
@@ -58,29 +59,31 @@ const CartDialog = ({ onClose, open }: CartDialogProps) => {
         <DialogContent>
           <DialogContentText>
           <List dense>
-              {items.map((item) => (
+              {items.length === 0 ? <Typography variant="body2">No items in cart</Typography> : items.map((item) => (
                 <ListItem>
                   <ListItemAvatar>
                     <Avatar variant="square" src={item.src} alt={item.title} />
                   </ListItemAvatar>
                   <ListItemText
                     primary={`${item.title}`}
+                    secondary={`${item.price} x ${item.quantity}€ = ${item.price * (item.quantity || 0)}€`}
                   />
                   <ListItemSecondaryAction>
-                    <IconButton aria-label="delete" onClick={() => removeItem(item.id)}>
-                      <DeleteIcon />
-                    </IconButton>
-                    <IconButton className={classes.quantityButton} aria-label="remove" onClick={() => updateItemQuantity(item.id, (item.quantity ? (item.quantity - 1): 0))}>
+                    <IconButton size="small" className={classes.quantityButton} aria-label="remove" onClick={() => updateItemQuantity(item.id, (item.quantity ? (item.quantity - 1): 0))}>
                       <RemoveIcon />
                     </IconButton>
                     <span className={classes.quantityText}>{item.quantity}</span>
-                    <IconButton className={classes.quantityButton} aria-label="add" onClick={() => updateItemQuantity(item.id,  (item.quantity ? (item.quantity + 1): 0))}>
+                    <IconButton size="small" className={classes.quantityButton} aria-label="add" onClick={() => updateItemQuantity(item.id,  (item.quantity ? (item.quantity + 1): 0))}>
                       <AddIcon />
+                    </IconButton>
+                    <IconButton size="small" aria-label="delete" onClick={() => removeItem(item.id)}>
+                      <DeleteIcon />
                     </IconButton>
                   </ListItemSecondaryAction>
                 </ListItem>
               ))}
             </List>
+            <Typography variant="h6">GRAND TOTAL: {totalCost}€</Typography>
           </DialogContentText>
         </DialogContent>
         <DialogActions>
