@@ -57,10 +57,12 @@ interface ProductCardProps {
     id: string;
 }
 
+// ProductCard component to visualize the data as cards.
 const ProductCard = ({title, description, price, src, id}: ProductCardProps) => {
 
     const classes = useStyles();
     const theme = useTheme();
+    // logic for hiding the product image when using extra small screens.
     const noImage = useMediaQuery(theme.breakpoints.down('xs'));
 
     const { addItem } = useCart();    

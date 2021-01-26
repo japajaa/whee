@@ -6,6 +6,8 @@ import WheeAppBar from './WheeAppBar';
 import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
 import { CartProvider } from "react-hook-cart";
 
+
+// Mock data used in client. This should be coming from backend...
 const mockData = [
   {
     title: "Circle",
@@ -30,6 +32,7 @@ const mockData = [
   }
 ]
 
+// Create a theme for MaterialUI.
 const wheeTheme = createMuiTheme({
   palette: {
     background: {

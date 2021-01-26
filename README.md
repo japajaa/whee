@@ -1,6 +1,11 @@
-# Getting Started with Create React App
+# Whee webstore
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Uses [MaterialUI](https://material-ui.com/) framework and [react-hook-cart]https://github.com/getTobiasNielsen/react-hook-cart).
+
+## Installation
+
+Run `npm install` in project root.
 
 ## Available Scripts
 

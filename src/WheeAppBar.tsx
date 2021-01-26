@@ -48,10 +48,12 @@ const useStyles = makeStyles((theme: Theme) =>
   }),
 );
 
+// Sticky AppBar with embedded CartDialog component for visualizing the shopping cart
 const WheeAppBar = () => {
   const [open, setOpen] = React.useState(false);
   const classes = useStyles();
   const theme = useTheme();
+  // logic for hiding the description text in AppBar, when using extra small screens.
   const hideDescription = useMediaQuery(theme.breakpoints.down('xs'));
   const { totalItems } = useCart();
 

@@ -41,9 +41,12 @@ interface CartDialogProps {
     open: boolean;
 }
 
+// CartDialog for visualizing the items in shopping cart
+// The "Proceed to checkout button" has onClose function as a placeholder. Should be replaced by function triggering the payment flow.
 const CartDialog = ({ onClose, open }: CartDialogProps) => {
   const theme = useTheme();
   const classes = useStyles();
+  // logic to display dialog in fullscreen mode for extra small screens.
   const fullScreen = useMediaQuery(theme.breakpoints.down('xs'));
   const { totalCost, items, removeItem, updateItemQuantity } = useCart();
 
