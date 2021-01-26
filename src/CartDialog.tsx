@@ -60,10 +60,9 @@ const CartDialog = ({ onClose, open }: CartDialogProps) => {
       >
         <DialogTitle id="shopping-cart-title">Shopping cart</DialogTitle>
         <DialogContent>
-          <DialogContentText>
           <List dense>
               {items.length === 0 ? <Typography variant="body2">No items in cart</Typography> : items.map((item) => (
-                <ListItem>
+                <ListItem key={item.id}>
                   <ListItemAvatar>
                     <Avatar variant="square" src={item.src} alt={item.title} />
                   </ListItemAvatar>
@@ -86,6 +85,7 @@ const CartDialog = ({ onClose, open }: CartDialogProps) => {
                 </ListItem>
               ))}
             </List>
+            <DialogContentText>
             <Typography variant="h6">GRAND TOTAL: {totalCost}€</Typography>
           </DialogContentText>
         </DialogContent>
